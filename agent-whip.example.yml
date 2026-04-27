@@ -1,0 +1,55 @@
+# AgentWhip Configuration
+# Copy this file to agent-whip.yml and customize for your project
+
+project:
+  name: "My Project"
+
+default_worker: "claude"  # Default worker to use
+
+claude:
+  api_key: "${ANTHROPIC_API_KEY}"  # Set in environment
+  model: "claude-opus-4-6"
+  max_concurrent: 3
+  timeout: 600  # seconds
+
+opencode:
+  api_key: "${OPENCODE_API_KEY}"  # Set in environment
+  model: "default"
+  max_concurrent: 2
+  timeout: 600
+
+execution:
+  max_retries: 3
+  retry_delay: 1.0  # seconds (exponential backoff)
+  task_timeout: 600  # seconds per task
+  continue_on_error: false  # Stop or continue on task failure
+
+qa:
+  enabled: true
+  run_after_phase: true  # Run QA after each phase
+  framework: "playwright"
+  test_command: "npm test"
+  create_tickets_on_failure: true
+
+state:
+  store: "json"
+  path: ".agent-whip/state.json"
+  backup_path: ".agent-whip/backup/"
+  checkpoint_interval: 60  # seconds
+
+# Runtime note:
+# Current orchestrator runtime persists and resumes from JSON state file.
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: ".agent-whip/agent-whip.log"
+  format: "json"  # or "text"
+
+notifications:
+  enabled: false
+  slack_webhook: "${SLACK_WEBHOOK_URL}"
+  notify_on:
+    - "phase_complete"
+    - "task_failed"
+    - "qa_failed"
+    - "completion"
