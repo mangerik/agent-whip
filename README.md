@@ -2,6 +2,10 @@
 
 **AI Agent Orchestration for Autonomous Development**
 
+<p align="center">
+  <img src="agentwhip.png" alt="AgentWhip Logo" width="600">
+</p>
+
 AgentWhip is an AI orchestrator that coordinates Claude Code/OpenCode to execute development plans automatically. Think of it as your "tukang cambuk" (whip-cracking overseer) that keeps development tasks moving until completion.
 
 ---
